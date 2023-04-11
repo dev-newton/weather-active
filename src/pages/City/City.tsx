@@ -7,7 +7,14 @@ import { CityHeader, CityInfo, Header, SearchInput } from "./components";
 import "./City.styles.scss";
 
 const City = () => {
-  const { selectedCity, dayjs } = useCities();
+  const {
+    selectedCity,
+    dayjs,
+    searchText,
+    handleSearchChange,
+    handleSearchBtnClicked,
+    handleEnterKeypressOnSearch,
+  } = useCities();
 
   useEffect(() => {
     if (selectedCity) localStorage.setItem("selectedCity", selectedCity);
@@ -38,7 +45,12 @@ const City = () => {
       <Header title={selectedCity} />
       <div className="city-body">
         <div className="fixed-pos">
-          <SearchInput />
+          <SearchInput
+            value={searchText}
+            onChange={handleSearchChange}
+            onKeyPress={handleEnterKeypressOnSearch}
+            onSearchBtnClicked={handleSearchBtnClicked}
+          />
         </div>
         <div className="weather-wrapper">
           <div className="weather-card">
@@ -96,7 +108,9 @@ const City = () => {
               />
             </div>
           </div>
-          <div className="weather-card weather-card--right"></div>
+          <div className="weather-card">
+            <h2>Notes</h2>
+          </div>
         </div>
       </div>
     </div>

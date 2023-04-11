@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -24,6 +24,7 @@ const useCities = () => {
   );
 
   const [showDrawer, setShowDrawer] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -46,9 +47,26 @@ const useCities = () => {
     navigate("/city");
   };
 
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearchText(e.target.value);
+
+  const handleSearchBtnClicked = () => {
+    dispatch(setSelectedCity(searchText));
+    setSearchText("");
+  };
+
+  const handleEnterKeypressOnSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    //it triggers by pressing the enter key
+    if (e.key === "Enter") {
+      handleSearchBtnClicked();
+    }
+  };
+
   return {
     dayjs,
     error,
+    searchText,
+    setSearchText,
     showDrawer,
     setShowDrawer,
     isFavorite,
@@ -61,6 +79,9 @@ const useCities = () => {
     removeOneFavorite,
     handleFavorite,
     handleCityClicked,
+    handleSearchChange,
+    handleSearchBtnClicked,
+    handleEnterKeypressOnSearch,
   };
 };
 
