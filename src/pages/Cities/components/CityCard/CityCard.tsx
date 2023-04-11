@@ -1,4 +1,5 @@
 import { Heart, X, Loader } from "react-feather";
+import { useNavigate } from "react-router-dom";
 
 import { useGetWeatherInfoQuery } from "services/weather.service";
 import useCities from "pages/Cities/useCities.hook";
@@ -15,6 +16,8 @@ const CityCard = ({ id, name, showXIcon = true }: ICityCard) => {
   const { isFavorite, favoriteCityIds, removeOneCity, handleFavorite } =
     useCities();
 
+  const navigate = useNavigate();
+
   if (isLoading) {
     return (
       <div className="loader">
@@ -25,13 +28,16 @@ const CityCard = ({ id, name, showXIcon = true }: ICityCard) => {
   const { temp_c, temp_f, condition } = data.current;
 
   return (
-    <div className="card">
+    <div className="card" onClick={() => navigate("/city")}>
       <div className="card-header">
         {showXIcon && (
           <X
             className="card-icon"
             color="white"
-            onClick={() => removeOneCity(id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              removeOneCity(id);
+            }}
           />
         )}
         <h2>{name}</h2>
@@ -48,7 +54,7 @@ const CityCard = ({ id, name, showXIcon = true }: ICityCard) => {
             className={`card-icon card-icon--${
               isFavorite(favoriteCityIds, id) ? "fill" : "empty"
             }`}
-            onClick={() => handleFavorite(id)}
+            onClick={(e) => handleFavorite(id, e)}
           />
         </div>
       </div>

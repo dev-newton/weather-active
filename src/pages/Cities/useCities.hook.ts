@@ -19,7 +19,8 @@ const useCities = () => {
   const addOneFavorite = (id: number) => dispatch(addFavorite(id));
   const removeOneFavorite = (id: number) => dispatch(removeFavorite(id));
 
-  const handleFavorite = (id: number) => {
+  const handleFavorite = (id: number, e: any) => {
+    e.stopPropagation();
     !isFavorite(favoriteCityIds, id)
       ? addOneFavorite(id)
       : removeOneFavorite(id);
