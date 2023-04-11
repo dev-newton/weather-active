@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Heart, X, Loader } from "react-feather";
 
 import { useGetWeatherInfoQuery } from "services/weather.service";
@@ -5,7 +6,6 @@ import useCities from "pages/Cities/useCities.hook";
 import { useAppDispatch } from "reducers/hooks";
 import { setError } from "reducers/citiesSlice";
 import "./CityCard.styles.scss";
-import { useEffect } from "react";
 
 interface ICityCard {
   id: number;

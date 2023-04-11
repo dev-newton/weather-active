@@ -5,7 +5,6 @@ import FavoritesDrawer from "./components/FavoritesDrawer/FavoritesDrawer";
 import useCities from "./useCities.hook";
 import Error from "components/Error/Error";
 import "./Cities.styles.scss";
-import { useEffect } from "react";
 
 const Cities = () => {
   const {
