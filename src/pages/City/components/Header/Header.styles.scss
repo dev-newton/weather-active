@@ -1,0 +1,21 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+
+.city-header {
+  background: linear-gradient(
+    90deg,
+    rgba(58, 180, 171, 1) 20%,
+    rgba(29, 35, 253, 1) 60%,
+    rgba(253, 29, 171, 1) 90%
+  );
+  @include mixins.displayFlex();
+  font-family: "Roboto Mono", monospace;
+  color: colors.$white;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  height: 200px;
+  padding: 30px;
+  position: sticky;
+  top: 90px;
+  z-index: 10;
+}

@@ -1,24 +1,17 @@
 import { createPortal } from "react-dom";
 
-import CardCity from "pages/Cities/components/CityCard/CityCard";
-import FavoritesDrawer from "./components/FavoritesDrawer/FavoritesDrawer";
+import { CityCard, FavoritesDrawer } from "./components";
 import useCities from "./useCities.hook";
 import Error from "components/Error/Error";
 import "./Cities.styles.scss";
 
 const Cities = () => {
-  const {
-    showDrawer,
-    setShowDrawer,
-    savedCities,
-    favorites,
-    error,
-    selectedCity,
-  } = useCities();
+  const { showDrawer, setShowDrawer, savedCities, favorites, error } =
+    useCities();
 
   const cities = [...savedCities]
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map((city) => <CardCity key={city.id} id={city.id} name={city.name} />);
+    .map((city) => <CityCard key={city.id} id={city.id} name={city.name} />);
 
   return (
     <>

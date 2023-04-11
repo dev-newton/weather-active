@@ -1,46 +1,102 @@
-import { Search } from "react-feather";
+import { useEffect } from "react";
+import { Loader } from "react-feather";
+
 import useCities from "pages/Cities/useCities.hook";
 import { useGetWeatherInfoQuery } from "services/weather.service";
+import { CityHeader, CityInfo, Header, SearchInput } from "./components";
 import "./City.styles.scss";
-import { useEffect } from "react";
-
-interface ICity {
-  name: string;
-}
 
 const City = () => {
-  const { selectedCity } = useCities();
+  const { selectedCity, dayjs } = useCities();
+
   useEffect(() => {
     if (selectedCity) localStorage.setItem("selectedCity", selectedCity);
   }, [selectedCity]);
-  // const { data, isLoading } = useGetWeatherInfoQuery(selectedCity);
+
+  const { data, isLoading, isError } = useGetWeatherInfoQuery(selectedCity);
+
+  if (isLoading) {
+    return (
+      <div className="loader">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return null;
+  }
+
+  const { temp_c, temp_f, condition, last_updated } = data?.current;
+  const { localtime } = data?.location;
+
+  const localTime = dayjs(localtime).format("llll");
+  const lastUpdated = dayjs(last_updated).format("llll");
 
   return (
     <div className="city">
-      <div className="city-header">
-        <h1>{selectedCity}</h1>
-      </div>
+      <Header title={selectedCity} />
       <div className="city-body">
-        <div className="input-wrapper">
-          <input type="text" placeholder="Search for a city..." />
-          <Search className="search-icon" />
+        <div className="fixed-pos">
+          <SearchInput />
         </div>
-        <h2>City</h2>
-        <div className="weather-card">
-          <div className="left-side">
-            <div className="temp">
-              <h3>Temperature</h3>
-              <div className="temp-content">
-                <img src="" alt="weather-icon" />
-                <div className="temp-info">
-                  <p>
-                    20°C|<span>50°F</span>
-                  </p>
-                </div>
-              </div>
+        <div className="weather-wrapper">
+          <div className="weather-card">
+            <h2>Weather Details</h2>
+            <CityHeader
+              icon={condition.icon}
+              temp_c={temp_c}
+              temp_f={temp_f}
+              lastUpdated={lastUpdated}
+              localTime={localTime}
+            />
+            <hr className="divider" />
+            <div className="body">
+              <CityInfo name="Weather condition" value={condition.text} />
+              <CityInfo
+                name="Precipitation"
+                value={data?.current.precip_mm}
+                unit="mm"
+              />
+              <CityInfo
+                name="Humidity"
+                value={data?.current.humidity}
+                unit="%"
+              />
+              <CityInfo
+                name="Wind speed"
+                value={data?.current.wind_kph}
+                unit="kph"
+              />
+              <CityInfo
+                name="Wind degree"
+                value={data?.current.wind_degree}
+                unit="deg"
+              />
+              <CityInfo
+                name="Wind direction"
+                value={data?.current.wind_dir}
+                unit="deg"
+              />
+              <CityInfo
+                name="Cloud cover"
+                value={data?.current.cloud}
+                unit="%"
+              />
+              <CityInfo name="UV Index" value={data?.current.uv} />
+              <CityInfo
+                name="Wind gust"
+                value={data?.current.wind_mph}
+                unit="mph"
+              />
+              <CityInfo
+                name="Pressure"
+                value={data?.current.pressure_in}
+                unit="in"
+              />
             </div>
           </div>
-          <div className="right-side"></div>
+          <div className="weather-card weather-card--right"></div>
         </div>
       </div>
     </div>

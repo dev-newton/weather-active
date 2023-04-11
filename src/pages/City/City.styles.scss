@@ -2,60 +2,47 @@
 @use "src/styles/partials/mixins";
 
 .city {
-  &-header {
-    background: linear-gradient(
-      90deg,
-      rgba(58, 180, 171, 1) 20%,
-      rgba(29, 35, 253, 1) 60%,
-      rgba(253, 29, 171, 1) 90%
-    );
-    @include mixins.displayFlex();
-    font-family: "Roboto Mono", monospace;
-    color: colors.$white;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    height: 200px;
-    padding: 30px;
-    position: sticky;
-    top: 90px;
-    z-index: 10;
-  }
-
   &-body {
     width: 1100px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 0 30px 30px;
 
-    .input-wrapper {
+    .fixed-pos {
+      position: sticky;
+      top: 290px;
       width: 100%;
-      position: relative;
-      margin: 10px 0;
+      padding: 40px 0 15px;
+      background-color: colors.$grey_100;
+    }
 
-      input {
+    .weather {
+      &-wrapper {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 20px;
         width: 100%;
-        border: 1px solid colors.$grey_200;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: transparent;
-        text-transform: capitalize;
+        margin-top: 10px;
+        overflow: scroll !important;
 
-        &::placeholder {
-          color: colors.$grey_300;
+        h2 {
+          margin-bottom: 20px;
         }
       }
 
-      .search-icon {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        color: colors.$grey_300;
-        cursor: pointer;
-      }
-    }
+      &-card {
+        background-color: colors.$white;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 500px;
+        overflow-y: scroll;
 
-    .weather-card {
-      background-color: colors.$white;
-      width: 100%;
+        hr.divider {
+          border: none;
+          border-bottom: 1px solid colors.$grey_200;
+          margin: 15px 0;
+        }
+      }
     }
   }
 }

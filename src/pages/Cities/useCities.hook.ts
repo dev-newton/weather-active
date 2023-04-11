@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
 
 import {
   addFavorite,
@@ -9,6 +13,10 @@ import {
 } from "reducers/citiesSlice";
 import { useAppDispatch, useAppSelector } from "reducers/hooks";
 import { isFavorite, getFavorites } from "utils";
+
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 const useCities = () => {
   const { savedCities, favoriteCityIds, selectedCity, error } = useAppSelector(
@@ -39,6 +47,7 @@ const useCities = () => {
   };
 
   return {
+    dayjs,
     error,
     showDrawer,
     setShowDrawer,

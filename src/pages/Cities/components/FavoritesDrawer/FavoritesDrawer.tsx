@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { X } from "react-feather";
 
 import { ICity } from "reducers/citiesSlice";
-import CardCity from "../CityCard/CityCard";
+import { CityCard } from "../../components";
 import "./FavoritesDrawer.styles.scss";
 
 interface IFavoritesDrawer {
@@ -36,7 +36,7 @@ const FavoritesDrawer = ({ onClose, favorites }: IFavoritesDrawer) => {
           {[...favorites]
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((city) => (
-              <CardCity
+              <CityCard
                 key={city.id}
                 id={city.id}
                 name={city.name}

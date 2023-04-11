@@ -1,0 +1,54 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+
+.header {
+  @include mixins.displayFlex(center, space-between, row);
+
+  .temp {
+    &-content {
+      margin-top: 5px;
+      @include mixins.displayFlex(center, flex-start, row);
+      gap: 10px;
+      img {
+        width: 50px;
+      }
+    }
+
+    &-info {
+      @include mixins.displayFlex(center, flex-start, row);
+      font-size: 32px;
+
+      p {
+        font-weight: 500;
+      }
+
+      .line {
+        border: none;
+        border-right: 1px solid colors.$grey_300;
+        width: 0 !important;
+        background-color: red;
+        height: 40px;
+        margin: 0 10px;
+      }
+
+      span {
+        color: colors.$grey_300;
+        font-weight: 300;
+      }
+    }
+  }
+
+  .date-info {
+    @include mixins.displayFlex(flex-start);
+
+    p {
+      font-size: 14px;
+    }
+
+    h4 {
+      &:last-of-type {
+        margin-top: 10px;
+      }
+    }
+  }
+}

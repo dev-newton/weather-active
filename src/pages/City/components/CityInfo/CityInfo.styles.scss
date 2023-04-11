@@ -1,0 +1,22 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+
+.city-info {
+  &--row {
+    @include mixins.displayFlex(center, space-between, row);
+
+    h4 {
+      font-weight: 400;
+    }
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &--line {
+    border: none;
+    border-bottom: 1px solid colors.$grey_200;
+    margin: 15px 0;
+  }
+}

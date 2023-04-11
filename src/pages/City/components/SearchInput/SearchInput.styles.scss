@@ -1,0 +1,28 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+
+.input-wrapper {
+  width: 100%;
+  position: relative;
+
+  input {
+    width: 100%;
+    border: 1px solid colors.$grey_200;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: colors.$grey_100;
+    text-transform: capitalize;
+
+    &::placeholder {
+      color: colors.$grey_300;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: colors.$grey_300;
+    cursor: pointer;
+  }
+}
