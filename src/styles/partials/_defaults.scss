@@ -32,13 +32,8 @@ button {
   font-family: inherit;
 }
 
-input::placeholder {
-  color: inherit;
-}
-
 button {
   cursor: pointer;
-  color: inherit;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }

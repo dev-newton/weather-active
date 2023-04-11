@@ -1,9 +1,11 @@
 import { Heart, X, Loader } from "react-feather";
-import { useNavigate } from "react-router-dom";
 
 import { useGetWeatherInfoQuery } from "services/weather.service";
 import useCities from "pages/Cities/useCities.hook";
+import { useAppDispatch } from "reducers/hooks";
+import { setError } from "reducers/citiesSlice";
 import "./CityCard.styles.scss";
+import { useEffect } from "react";
 
 interface ICityCard {
   id: number;
@@ -12,11 +14,20 @@ interface ICityCard {
 }
 
 const CityCard = ({ id, name, showXIcon = true }: ICityCard) => {
-  const { data, isLoading } = useGetWeatherInfoQuery(name);
-  const { isFavorite, favoriteCityIds, removeOneCity, handleFavorite } =
-    useCities();
+  const { data, isLoading, isError } = useGetWeatherInfoQuery(name);
+  const {
+    isFavorite,
+    favoriteCityIds,
+    removeOneCity,
+    handleFavorite,
+    handleCityClicked,
+  } = useCities();
 
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setError(isError));
+  }, [isError]);
 
   if (isLoading) {
     return (
@@ -25,10 +36,15 @@ const CityCard = ({ id, name, showXIcon = true }: ICityCard) => {
       </div>
     );
   }
-  const { temp_c, temp_f, condition } = data.current;
+
+  if (isError) {
+    return null;
+  }
+
+  const { temp_c, temp_f, condition } = data?.current;
 
   return (
-    <div className="card" onClick={() => navigate("/city")}>
+    <div className="card" onClick={() => handleCityClicked(name)}>
       <div className="card-header">
         {showXIcon && (
           <X

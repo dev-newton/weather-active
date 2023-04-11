@@ -11,7 +11,8 @@ export interface ICity {
 interface CitiesState {
   savedCities: ICity[];
   favoriteCityIds: number[];
-  selectedCity: ICity | null;
+  selectedCity: string | null;
+  error: boolean;
 }
 
 const initCities = () => {
@@ -22,10 +23,13 @@ const initCities = () => {
   return parsedCities;
 };
 
+const selectedCity = localStorage.getItem("selectedCity");
+
 const initialState: CitiesState = {
   savedCities: initCities(),
   favoriteCityIds: [],
-  selectedCity: null,
+  selectedCity,
+  error: false,
 };
 
 const citiesSlice = createSlice({
@@ -40,6 +44,9 @@ const citiesSlice = createSlice({
         (id) => id !== action.payload
       );
     },
+    setSelectedCity(state, action) {
+      state.selectedCity = action.payload;
+    },
     addFavorite(state, action) {
       state.favoriteCityIds = [...state.favoriteCityIds, action.payload];
     },
@@ -48,9 +55,18 @@ const citiesSlice = createSlice({
         (id) => id !== action.payload
       );
     },
+    setError(state, action) {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { removeCity, addFavorite, removeFavorite } = citiesSlice.actions;
+export const {
+  removeCity,
+  setSelectedCity,
+  addFavorite,
+  removeFavorite,
+  setError,
+} = citiesSlice.actions;
 
 export default citiesSlice.reducer;

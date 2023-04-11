@@ -3,6 +3,10 @@
 
 .loader {
   @include mixins.displayFlex();
+
+  &.mt-10 {
+    margin-top: 50px;
+  }
 }
 
 .card {
