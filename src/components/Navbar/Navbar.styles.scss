@@ -1,0 +1,17 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+
+nav {
+  height: 90px;
+  background-color: colors.$grey_800;
+  padding-left: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  @include mixins.displayFlex(flex-start);
+
+  h1 {
+    color: colors.$white;
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,55 @@
+@use "./vars";
+@use "./colors";
+@use "./mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: vars.$font-family;
+  font-weight: vars.$light;
+  background-color: colors.$grey_100;
+  font-style: normal;
+  letter-spacing: 0.5px;
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}

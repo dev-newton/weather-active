@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Tokyo"
+  },
+  {
+    "id": 2,
+    "name": "Delhi"
+  },
+  {
+    "id": 3,
+    "name": "Shanghai"
+  },
+  {
+    "id": 4,
+    "name": "Sao Paulo"
+  },
+  {
+    "id": 5,
+    "name": "Mexico City"
+  },
+  {
+    "id": 6,
+    "name": "Cairo"
+  },
+  {
+    "id": 7,
+    "name": "Dhaka"
+  },
+  {
+    "id": 8,
+    "name": "Mumbai"
+  },
+  {
+    "id": 9,
+    "name": "Beijing"
+  },
+  {
+    "id": 10,
+    "name": "Osaka"
+  },
+  {
+    "id": 11,
+    "name": "Chongqing"
+  },
+  {
+    "id": 12,
+    "name": "Karachi"
+  },
+  {
+    "id": 13,
+    "name": "Kinshasa"
+  },
+  {
+    "id": 14,
+    "name": "Lagos"
+  },
+  {
+    "id": 15,
+    "name": "Istanbul"
+  }
+]
