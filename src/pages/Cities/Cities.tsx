@@ -12,7 +12,7 @@ const Cities = () => {
     <>
       <div className="cities">
         <button onClick={() => setShowDrawer(true)}>
-          Favorites: {favorites.length}
+          View Favorites: {favorites.length}
         </button>
 
         <div className="grid">
