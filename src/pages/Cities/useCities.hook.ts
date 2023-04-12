@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -9,26 +9,35 @@ import {
   addFavorite,
   removeCity,
   removeFavorite,
+  setCurrentCoords,
   setSelectedCity,
 } from "reducers/citiesSlice";
 import { useAppDispatch, useAppSelector } from "reducers/hooks";
 import { isFavorite, getFavorites } from "utils";
+import { useGetWeatherInfoQuery } from "services/weather.service";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
 const useCities = () => {
-  const { savedCities, favoriteCityIds, selectedCity, error } = useAppSelector(
-    (state) => state.cities
-  );
-
   const [showDrawer, setShowDrawer] = useState(false);
+  const [loadingCoords, setLoadingCoords] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { savedCities, favoriteCityIds, selectedCity, error, currentCoords } =
+    useAppSelector((state) => state.cities);
+
+  // useEffect(() => {
+  //   // if (selectedCity?.length) {
+  //   //   navigate("/city");
+  //   // }
+  //   dispatch(setSelectedCity(""));
+  // }, [selectedCity]);
 
   const favorites = getFavorites(savedCities, favoriteCityIds);
 
@@ -44,6 +53,9 @@ const useCities = () => {
   };
 
   const handleCityClicked = (name: string) => {
+    if (currentCoords) {
+      dispatch(setCurrentCoords(null));
+    }
     dispatch(setSelectedCity(name));
     navigate("/city");
   };
@@ -70,8 +82,25 @@ const useCities = () => {
     }
   };
 
+  // GET USER LOCATION COORDS
+  const successCallback = (position: GeolocationPosition) => {
+    const { latitude, longitude } = position.coords;
+    dispatch(setCurrentCoords(`${latitude},${longitude}`));
+    setLoadingCoords(false);
+  };
+
+  const errorCallback = (error: GeolocationPositionError) => {
+    console.log(error);
+  };
+
+  const getCurrentPosition = () => {
+    setLoadingCoords(true);
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  };
   return {
     dayjs,
+    navigate,
+    dispatch,
     error,
     errorMsg,
     searchText,
@@ -91,6 +120,10 @@ const useCities = () => {
     handleSearchChange,
     handleSearchBtnClicked,
     handleEnterKeypressOnSearch,
+    getCurrentPosition,
+    currentCoords,
+    setSelectedCity,
+    loadingCoords,
   };
 };
 

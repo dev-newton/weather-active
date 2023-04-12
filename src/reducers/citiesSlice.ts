@@ -7,6 +7,11 @@ export interface ICity {
   name: string;
 }
 
+export interface ICoords {
+  latitude: number;
+  longitude: number;
+}
+
 export interface INote {
   id: number;
   city: string | null;
@@ -22,6 +27,7 @@ interface CitiesState {
   error: boolean;
   savedNotes: INote[];
   selectedNote: INote | null;
+  currentCoords: string | null;
 }
 
 const initCities = () => {
@@ -48,6 +54,7 @@ const initialState: CitiesState = {
   error: false,
   savedNotes: initNotes(),
   selectedNote: null,
+  currentCoords: null,
 };
 
 const citiesSlice = createSlice({
@@ -95,6 +102,10 @@ const citiesSlice = createSlice({
         (note: INote) => note.id !== action.payload?.id
       );
     },
+    // COORDS
+    setCurrentCoords(state, action) {
+      state.currentCoords = action.payload;
+    },
   },
 });
 
@@ -108,6 +119,7 @@ export const {
   setSelectedNote,
   updateNote,
   deleteNote,
+  setCurrentCoords,
 } = citiesSlice.actions;
 
 export default citiesSlice.reducer;
