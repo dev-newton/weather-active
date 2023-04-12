@@ -1,23 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import citiesData from "data/cities.json";
-
-export interface ICity {
-  id: number;
-  name: string;
-}
-
-export interface ICoords {
-  latitude: number;
-  longitude: number;
-}
-
-export interface INote {
-  id: number;
-  city: string | null;
-  text: string;
-  date: string;
-}
+import { ICity, INote } from "types";
 
 // Define a type for the slice state
 interface CitiesState {
