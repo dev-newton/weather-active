@@ -1,0 +1,15 @@
+@use "src/styles/partials/colors";
+
+button {
+  background-color: colors.$grey_800;
+  padding: 10px 20px;
+  color: colors.$white;
+  cursor: pointer;
+  font-size: 16px;
+
+  &.disabled {
+    background-color: colors.$grey_200;
+    cursor: not-allowed;
+    user-select: none;
+  }
+}

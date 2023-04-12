@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { CityCard, FavoritesDrawer } from "./components";
 import useCities from "./useCities.hook";
 import Error from "components/Error/Error";
+import Button from "components/Button/Button";
 import "./Cities.styles.scss";
 
 const Cities = () => {
@@ -18,9 +19,10 @@ const Cities = () => {
       {error && <Error />}
 
       <div className="cities" style={{ display: error ? "none" : "block" }}>
-        <button onClick={() => setShowDrawer(true)}>
-          View Favorites: {favorites.length}
-        </button>
+        <Button
+          onClick={() => setShowDrawer(true)}
+          label={`View Favorites: ${favorites.length}`}
+        />
 
         <div className="grid">{cities}</div>
         {!savedCities.length && (

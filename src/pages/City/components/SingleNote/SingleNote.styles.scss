@@ -1,0 +1,43 @@
+@use "src/styles/partials/colors";
+@use "src/styles/partials/mixins";
+.note {
+  border: 2px dotted colors.$grey_200;
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 15px;
+  user-select: none;
+
+  p {
+    padding: 5px 15px;
+  }
+
+  .controls {
+    padding: 5px 15px 5px 15px;
+    margin-top: 10px;
+    border-top: 2px dotted colors.$grey_200;
+    @include mixins.displayFlex(center, space-between, row);
+
+    h6 {
+      font-size: 10px;
+    }
+
+    .right {
+      @include mixins.displayFlex(center, flex-end, row);
+      gap: 5px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+
+      &-edit {
+        color: cornflowerblue;
+      }
+
+      &-delete {
+        color: colors.$red;
+      }
+    }
+  }
+}

@@ -7,12 +7,21 @@ export interface ICity {
   name: string;
 }
 
+export interface INote {
+  id: number;
+  city: string | null;
+  text: string;
+  date: string;
+}
+
 // Define a type for the slice state
 interface CitiesState {
   savedCities: ICity[];
   favoriteCityIds: number[];
   selectedCity: string | null;
   error: boolean;
+  savedNotes: INote[];
+  selectedNote: INote | null;
 }
 
 const initCities = () => {
@@ -23,6 +32,13 @@ const initCities = () => {
   return parsedCities;
 };
 
+const initNotes = () => {
+  const storageNotes = localStorage.getItem("savedNotes");
+  const parsedNotes = storageNotes ? JSON.parse(storageNotes) : [];
+
+  return parsedNotes;
+};
+
 const selectedCity = localStorage.getItem("selectedCity");
 
 const initialState: CitiesState = {
@@ -30,12 +46,15 @@ const initialState: CitiesState = {
   favoriteCityIds: [],
   selectedCity,
   error: false,
+  savedNotes: initNotes(),
+  selectedNote: null,
 };
 
 const citiesSlice = createSlice({
   name: "cities",
   initialState,
   reducers: {
+    // CITIES
     removeCity(state, action) {
       state.savedCities = state.savedCities.filter(
         (city) => city.id !== action.payload
@@ -47,6 +66,7 @@ const citiesSlice = createSlice({
     setSelectedCity(state, action) {
       state.selectedCity = action.payload;
     },
+    // FAVORITES
     addFavorite(state, action) {
       state.favoriteCityIds = [...state.favoriteCityIds, action.payload];
     },
@@ -58,6 +78,23 @@ const citiesSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    // NOTES
+    addNote(state, action) {
+      state.savedNotes = [...state.savedNotes, action.payload];
+    },
+    setSelectedNote(state, action) {
+      state.selectedNote = action.payload;
+    },
+    updateNote(state, action) {
+      state.savedNotes = state.savedNotes.map((note: INote) => {
+        return note.id === action.payload.id ? action.payload : note;
+      });
+    },
+    deleteNote(state, action) {
+      state.savedNotes = state.savedNotes.filter(
+        (note: INote) => note.id !== action.payload?.id
+      );
+    },
   },
 });
 
@@ -67,6 +104,10 @@ export const {
   addFavorite,
   removeFavorite,
   setError,
+  addNote,
+  setSelectedNote,
+  updateNote,
+  deleteNote,
 } = citiesSlice.actions;
 
 export default citiesSlice.reducer;

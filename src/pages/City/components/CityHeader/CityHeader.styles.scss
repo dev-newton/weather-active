@@ -39,7 +39,7 @@
   }
 
   .date-info {
-    @include mixins.displayFlex(flex-start);
+    @include mixins.displayFlex(flex-end);
 
     p {
       font-size: 14px;

@@ -5,14 +5,19 @@
   &-body {
     width: 1100px;
     margin: 0 auto;
-    padding: 0 30px 30px;
+    padding: 0 30px 50px;
 
     .fixed-pos {
       position: sticky;
-      top: 290px;
+      top: 180px;
       width: 100%;
       padding: 40px 0 15px;
       background-color: colors.$grey_100;
+    }
+
+    .error-msg {
+      color: colors.$red;
+      margin: 5px 5px 0;
     }
 
     .weather {
@@ -34,7 +39,7 @@
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
           0 4px 6px -4px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        height: 500px;
+        height: 750px;
         overflow-y: scroll;
 
         hr.divider {

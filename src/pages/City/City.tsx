@@ -3,7 +3,9 @@ import { Loader } from "react-feather";
 
 import useCities from "pages/Cities/useCities.hook";
 import { useGetWeatherInfoQuery } from "services/weather.service";
-import { CityHeader, CityInfo, Header, SearchInput } from "./components";
+import { CityHeader, CityInfo, Header, Notes, SearchInput } from "./components";
+import Error from "components/Error/Error";
+import useNotes from "./useNotes.hook";
 import "./City.styles.scss";
 
 const City = () => {
@@ -14,11 +16,21 @@ const City = () => {
     handleSearchChange,
     handleSearchBtnClicked,
     handleEnterKeypressOnSearch,
+    errorMsg,
   } = useCities();
 
+  const { savedNotes } = useNotes();
+
   useEffect(() => {
-    if (selectedCity) localStorage.setItem("selectedCity", selectedCity);
-  }, [selectedCity]);
+    // UPDATE selectedCity storage WHEN "selectedCity" changes
+    if (selectedCity) {
+      localStorage.setItem("selectedCity", selectedCity);
+    }
+    // UPDATE savedNotes storage WHEN "savedNotes" changes
+    if (savedNotes) {
+      localStorage.setItem("savedNotes", JSON.stringify(savedNotes));
+    }
+  }, [selectedCity, savedNotes]);
 
   const { data, isLoading, isError } = useGetWeatherInfoQuery(selectedCity);
 
@@ -31,7 +43,7 @@ const City = () => {
   }
 
   if (isError) {
-    return null;
+    return <Error />;
   }
 
   const { temp_c, temp_f, condition, last_updated } = data?.current;
@@ -51,6 +63,7 @@ const City = () => {
             onKeyPress={handleEnterKeypressOnSearch}
             onSearchBtnClicked={handleSearchBtnClicked}
           />
+          <p className="error-msg">{errorMsg}</p>
         </div>
         <div className="weather-wrapper">
           <div className="weather-card">
@@ -108,8 +121,11 @@ const City = () => {
               />
             </div>
           </div>
-          <div className="weather-card">
-            <h2>Notes</h2>
+          <div id="notes" className="weather-card">
+            <div className="fix-po">
+              <h2>Notes</h2>
+              <Notes city={selectedCity} />
+            </div>
           </div>
         </div>
       </div>

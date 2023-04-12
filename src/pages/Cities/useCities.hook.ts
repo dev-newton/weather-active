@@ -25,6 +25,7 @@ const useCities = () => {
 
   const [showDrawer, setShowDrawer] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -51,6 +52,13 @@ const useCities = () => {
     setSearchText(e.target.value);
 
   const handleSearchBtnClicked = () => {
+    setErrorMsg("");
+    const cityExists = savedCities.filter(
+      (city) => city.name.toLowerCase() === searchText.toLowerCase()
+    );
+    if (!cityExists.length) {
+      return setErrorMsg("This city does not exist, try another one!");
+    }
     dispatch(setSelectedCity(searchText));
     setSearchText("");
   };
@@ -65,6 +73,7 @@ const useCities = () => {
   return {
     dayjs,
     error,
+    errorMsg,
     searchText,
     setSearchText,
     showDrawer,
