@@ -1,5 +1,5 @@
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Loader } from "react-feather";
 
 import { CityCard, FavoritesDrawer } from "./components";
 import useCities from "./useCities.hook";
@@ -7,7 +7,6 @@ import Error from "components/Error/Error";
 import Button from "components/Button/Button";
 import { useGetWeatherInfoQuery } from "services/weather.service";
 import "./Cities.styles.scss";
-import { useEffect } from "react";
 
 const Cities = () => {
   const {
@@ -16,32 +15,22 @@ const Cities = () => {
     savedCities,
     favorites,
     error,
-    currentCoords,
-    getCurrentPosition,
-    loadingCoords,
-    navigate,
+    coords,
+    skip,
+    handleGetUserCity,
     handleCityClicked,
+    cityLoading,
   } = useCities();
-
-  const { data, isLoading, isError } = useGetWeatherInfoQuery(currentCoords, {
-    skip: currentCoords ? false : true,
+  // Fetch data when lat and lng have been recieved
+  const { data } = useGetWeatherInfoQuery(coords, {
+    skip,
   });
 
   useEffect(() => {
-    if (data && data.location) handleCityClicked(data.location.name);
+    if (data) {
+      handleCityClicked(data?.location.name);
+    }
   }, [data]);
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="loader mt-10">
-  //       <Loader />
-  //     </div>
-  //   );
-  // }
-
-  // if (isError) {
-  //   return <Error />;
-  // }
 
   return (
     <>
@@ -55,8 +44,8 @@ const Cities = () => {
           />
 
           <Button
-            onClick={getCurrentPosition}
-            label={loadingCoords ? "Loading..." : "Current City Weather"}
+            onClick={handleGetUserCity}
+            label={cityLoading ? "Loading..." : "Current City Weather"}
           />
         </div>
 

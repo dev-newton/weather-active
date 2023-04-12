@@ -26,7 +26,7 @@ const Notes = ({ city }: INotes) => {
 
   useEffect(() => {
     const notes = savedNotes.filter(
-      (note) => note.city?.toLowerCase() === city?.toLowerCase()
+      (note: INote) => note.city?.toLowerCase() === city?.toLowerCase()
     );
     setCityNotes(notes);
   }, [savedNotes, city]);

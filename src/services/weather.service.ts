@@ -5,8 +5,11 @@ const { VITE_API_URL, VITE_API_KEY } = import.meta.env;
 // Define a service using a base URL and expected endpoints
 export const weatherApi = createApi({
   reducerPath: "weatherApi",
-  baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_URL}` }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${VITE_API_URL}`,
+  }),
   refetchOnReconnect: true,
+  keepUnusedDataFor: 5,
   endpoints: (builder) => ({
     getWeatherInfo: builder.query({
       query: (city) => `?key=${VITE_API_KEY}&q=${city}`,
