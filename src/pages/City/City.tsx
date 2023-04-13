@@ -124,7 +124,7 @@ const City = () => {
           <div id="notes" className="weather-card">
             <div className="fix-po">
               <h2>Notes</h2>
-              <Notes city={selectedCity} />
+              <Notes city={selectedCity} savedNotes={savedNotes} />
             </div>
           </div>
         </div>

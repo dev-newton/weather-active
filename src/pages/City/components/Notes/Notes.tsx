@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 
 import Button from "components/Button/Button";
 import SingleNote from "../SingleNote/SingleNote";
-import { INote } from "reducers/citiesSlice";
 import useNotes from "pages/City/useNotes.hook";
+import { INote } from "types";
 import "./Notes.styles.scss";
 
 interface INotes {
   city: INote["city"];
   selectedNote?: INote | null;
+  savedNotes: INote[];
 }
 
-const Notes = ({ city }: INotes) => {
+const Notes = ({ city, savedNotes }: INotes) => {
   const [cityNotes, setCityNotes] = useState<INote[]>([]);
 
   const {
     dayjs,
-    savedNotes,
     text,
     handleChange,
     handleSaveNote,

@@ -2,13 +2,13 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import useCities from "pages/Cities/useCities.hook";
 import {
-  INote,
   addNote,
   deleteNote,
   setSelectedNote,
   updateNote,
 } from "reducers/citiesSlice";
 import { useAppDispatch, useAppSelector } from "reducers/hooks";
+import { INote } from "types";
 
 const useNotes = () => {
   const [text, setText] = useState("");
