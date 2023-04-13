@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { X } from "react-feather";
 
-import { ICity } from "reducers/citiesSlice";
 import { CityCard } from "../../components";
+import { ICity } from "types";
 import "./FavoritesDrawer.styles.scss";
 
 interface IFavoritesDrawer {

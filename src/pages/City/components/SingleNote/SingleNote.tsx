@@ -1,7 +1,7 @@
 import { Edit, Trash } from "react-feather";
 
-import { INote } from "reducers/citiesSlice";
 import useNotes from "pages/City/useNotes.hook";
+import { INote } from "types";
 import "./SingleNote.styles.scss";
 
 const SingleNote = (note: INote) => {

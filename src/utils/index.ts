@@ -1,4 +1,4 @@
-import { ICity } from "reducers/citiesSlice";
+import { ICity } from "types";
 
 export const isFavorite = (favoriteCityIds: number[], id: number) =>
   favoriteCityIds.includes(id);
