@@ -18,12 +18,7 @@
   box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45);
 
   &-header {
-    background: linear-gradient(
-      90deg,
-      rgba(58, 180, 171, 1) 20%,
-      rgba(29, 35, 253, 1) 60%,
-      rgba(253, 29, 171, 1) 90%
-    );
+    background: #82c6ea;
     font-family: "Roboto Mono", monospace;
     color: colors.$white;
     text-transform: uppercase;

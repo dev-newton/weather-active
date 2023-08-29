@@ -2,12 +2,7 @@
 @use "src/styles/partials/mixins";
 
 .city-header {
-  background: linear-gradient(
-    90deg,
-    rgba(58, 180, 171, 1) 20%,
-    rgba(29, 35, 253, 1) 60%,
-    rgba(253, 29, 171, 1) 90%
-  );
+  background: #82c6ea;
   @include mixins.displayFlex();
   font-family: "Roboto Mono", monospace;
   color: colors.$white;
