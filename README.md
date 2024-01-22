@@ -1,4 +1,3 @@
-# Assignment Version Number: FE-2023-04-i
 
 # WeatherActive APP
 
@@ -91,21 +90,4 @@ VITE_API_KEY=c3c4e1a812174973977181408231004
   - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times 2kb only!
   - All API operations that change the Day.js object will return a new instance instead. This helps prevent bugs and avoid long debugging sessions.
 
-- React Feather
-  - 24x24 grid icons that focus on simplicity, consistency, and flexibility
 
-## Best Practices Followed
-
-- Absolute Imports: I made use of Absolute Imports as it makes the code cleaner and easier to write, makes it easy to locate a file or component imported due to absolute positioning, and removes the unneccessary need for `../../../`.
-- Strongly typed application, thanks to TypeScript
-- Redux implementation for state management
-- Clean app folder structure/architecture
-- Seperation of concerns: separated UI from logic to make code cleaner, reusable, easier to track bugs
-- Hooks: made use of both react hooks and two custom built hooks: `useCities` and `useNotes` to enable re-usability of stateful logic, and reduce code duplication.
-- Regarding comments: I have a belief that if you have to add a comment, then maybe that code should be refractored in a way that is easier to understand. So basically, code in a way that's easier to understand so you dont have to add comments, unless of course its really necessary.
-
-## Possible Improvements/Limitations
-
-- Responsiveness
-- Improve accessibility
-- Unit test other parts of the application
